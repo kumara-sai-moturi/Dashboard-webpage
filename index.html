@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudentHub — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      <span>Dashboard</span>
+    </div>
+
+    <button class="nav-item active" onclick="navigate('home', this)">
+      <span class="nav-icon">🏠</span>
+      <span class="nav-label">Home</span>
+    </button>
+    <button class="nav-item" onclick="navigate('tasks', this)">
+      <span class="nav-icon">📋</span>
+      <span class="nav-label">Tasks</span>
+    </button>
+    <button class="nav-item" onclick="navigate('profile', this)">
+      <span class="nav-icon">👤</span>
+      <span class="nav-label">Profile</span>
+    </button>
+
+    <div class = "sidebar-footer">Logout</div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main">
+
+    <!--HOME PAGE-->
+    <div id="page-home" class="page active">
+      <div class="page-title">Welcome back Sai👋</div>
+      <div class="page-sub">Here's a snapshot of your progress</div>
+
+      <!-- Welcome Banner -->
+      <div class="welcome-card">
+        <div class="welcome-icon">🎓</div>
+        <div>
+          <div class="welcome-text">B.Tech CSE · Batch 2028 · MBU</div>
+          <div class="welcome-sub">Roll No: 24102a040259</div>
+        </div>
+      </div>
+
+      <!-- Metric Cards -->
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-label">Total tasks</div>
+          <div class="metric-value blue">8</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Completed</div>
+          <div class="metric-value green">3</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">In progress</div>
+          <div class="metric-value amber">3</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Pending</div>
+          <div class="metric-value red">2</div>
+        </div>
+      </div>
+
+      <!-- Progress + Due Soon -->
+      <div class="two-col">
+        <div class="card">
+          <div class="card-title">Overall progress</div>
+          <div style="font-size:13px; color:var(--muted)">3 of 8 tasks completed</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 37.5%"></div>
+          </div>
+          <div style="font-size:12px; color:var(--hint); margin-top:6px;">37.5% done</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Due soon</div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#e24b4a"></div>
+              <div>
+                <div class="activity-text">SQL Assignment 3</div>
+                <div class="activity-time">Due tomorrow · Apr 29</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#ba7517"></div>
+              <div>
+                <div class="activity-text">OOP Lab Report</div>
+                <div class="activity-time">Due in 3 days · May 1</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-dot" style="background:#378add"></div>
+              <div>
+                <div class="activity-text">Java DSA Problem</div>
+                <div class="activity-time">Due May 3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="card">
+        <div class="card-title">Recent activity</div>
+        <div class="activity-list">
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#639922"></div>
+            <div>
+              <div class="activity-text">Completed: C++ Pointers Assignment</div>
+              <div class="activity-time">Today, 10:30 AM</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#378add"></div>
+            <div>
+              <div class="activity-text">Started: Web Dev Internship Project</div>
+              <div class="activity-time">Yesterday, 2:15 PM</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#639922"></div>
+            <div>
+              <div class="activity-text">Completed: DBMS_PREP Test 2</div>
+              <div class="activity-time">Apr 25</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#639922"></div>
+            <div>
+              <div class="activity-text">Completed: Python Basics Assessment</div>
+              <div class="activity-time">Apr 26</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--END HOME-->
+
+
+    <!--TASKS PAGE-->
+    <div id="page-tasks" class="page">
+      <div class="page-title">My Tasks</div>
+      <div class="page-sub">View and track all your assigned work</div>
+
+      <!-- Filter Buttons -->
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterTasks('all', this)">All (8)</button>
+        <button class="filter-btn" onclick="filterTasks('done', this)">✓ Completed (3)</button>
+        <button class="filter-btn" onclick="filterTasks('inprog', this)">↻ In Progress (3)</button>
+        <button class="filter-btn" onclick="filterTasks('pending', this)">○ Pending (2)</button>
+      </div>
+
+      <!-- Task List (populated by script.js) -->
+      <div class="task-list" id="task-list"></div>
+    </div>
+    <!--END TASKS-->
+
+
+    <!--PROFILE PAGE-->
+    <div id="page-profile" class="page">
+      <div class="page-title">My Profile</div>
+      <div class="page-sub">Your academic details and skills</div>
+
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="avatar">S</div>
+        <div>
+          <div class="profile-name">Sai</div>
+          <div class="profile-role">B.Tech Computer Science · MBU</div>
+        </div>
+        <button class="edit-btn">Edit profile</button>
+      </div>
+
+      <!-- Academic Info -->
+      <div class="card">
+        <div class="card-title">Academic information</div>
+        <div class="profile-grid">
+          <div class="profile-field">
+            <div class="field-label">Roll Number</div>
+            <div class="field-value">24102a040259</div>
+          </div>
+          <div class="profile-field">
+            <div class="field-label">Batch</div>
+            <div class="field-value">2028</div>
+          </div>
+          <div class="profile-field">
+            <div class="field-label">Branch</div>
+            <div class="field-value">Computer Science &amp; Engineering</div>
+          </div>
+          <div class="profile-field">
+            <div class="field-label">University</div>
+            <div class="field-value">Mohan Babu University (MBU)</div>
+          </div>
+          <div class="profile-field">
+            <div class="field-label">Current Year</div>
+            <div class="field-value">2nd Year</div>
+          </div>
+          <div class="profile-field">
+            <div class="field-label">Semester</div>
+            <div class="field-value">Semester 4</div>
+          </div>
+          <div class="profile-field">
+            <div class="field-label">Email</div>
+            <div class="field-value">24102a040259@mbu.edu.in</div>
+          </div>
+          <div class="profile-field">
+            <div class="field-label">Specialization</div>
+            <div class="field-value">Core CSE</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div class="card">
+        <div class="card-title">Skills &amp; subjects</div>
+        <div class="skills-wrap">
+          <span class="badge badge-done">C++</span>
+          <span class="badge badge-done">SQL / MySQL</span>
+          <span class="badge badge-done">Python</span>
+          <span class="badge badge-inprog">Web Development</span>
+          <span class="badge badge-inprog">Java</span>
+          <span class="badge badge-inprog">OOP</span>
+          <span class="badge badge-review">Data Structures &amp; Algorithms</span>
+          <span class="badge badge-pending">DBMS</span>
+          <span class="badge badge-pending">Operating Systems</span>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="card">
+        <div class="card-title">Task completion overview</div>
+        <div class="metrics" style="margin: 0">
+          <div class="metric">
+            <div class="metric-label">Total tasks</div>
+            <div class="metric-value blue">8</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Completed</div>
+            <div class="metric-value green">3</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">In progress</div>
+            <div class="metric-value amber">3</div>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Pending</div>
+            <div class="metric-value red">2</div>
+          </div>
+        </div>
+        <div class="progress-bar" style="margin-top: 1rem">
+          <div class="progress-fill" style="width: 37.5%"></div>
+        </div>
+        <div style="font-size:12px; color:var(--hint); margin-top:6px;">37.5% overall completion</div>
+      </div>
+    </div>
+    <!-- END PROFILE-->
+
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
